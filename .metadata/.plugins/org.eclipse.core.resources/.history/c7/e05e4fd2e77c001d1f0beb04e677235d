@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>공지사항 목록</title>
+	<th:block th:insert="common/head"></th:block>
+	<style>
+	.table { border-top:2px solid #212529; }
+	</style>
+</head>
+<body>
+<div class="fluid-container">
+	<th:block th:insert="common/header"></th:block>
+	<div class="py-5">
+		<div class="container px-5 my-5">
+			<div class="text-center mb-5">
+                <h1 class="fw-bolder">공지사항 목록</h1>
+			</div>
+			<div class="row gx-5">
+                <div class="col-xl-12">
+                    <!-- FAQ Accordion 1-->
+                    <h2 class="fw-bolder mb-3">공지사항</h2>
+                    <table class="table table-striped">
+                    	<thead class="thead-dark">
+                    		<tr>
+                    			<th scope="col">연번</th>
+                    			<th scope="col">제목</th>
+                    			<th scope="col">작성자</th>
+                    		</tr>
+                    	</thead>
+                    	<tbody>
+	                        <tr th:each="board : ${boardList}">
+	                            <td th:text="${board.id}"></td>
+	                            <td>
+	                            	<a th:href="@{/board/detail(id=${board.id})}" th:text="${board.title}"></a>
+	                            </td>
+	                            <td th:text="${board.writer}"></td>
+	                        </tr>
+                    	</tbody>
+                    </table>
+                </div>
+                <div class="container" role="group">
+                	<a class="btn btn-primary inline" href="/board/add">글 등록</a>
+                </div>
+            </div>
+		</div>
+  	</div>
+	<th:block th:insert="common/footer"></th:block>
+</div>
+</body>
+</html>

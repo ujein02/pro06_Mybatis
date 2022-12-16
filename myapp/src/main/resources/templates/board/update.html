@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>공지사항 글 등록</title>
+	<th:block th:insert="common/head"></th:block>
+</head>
+<body>
+<div class="fluid-container">
+	<th:block th:insert="common/header"></th:block>
+	<div class="py-5">
+		<div class="container px-5 my-5">
+			<div class="text-center mb-5">
+                <h1 class="fw-bolder">공지사항 글 등록</h1>
+			</div>
+			<div class="row gx-5">
+                <div class="col-xl-12">
+                     <form th:action="@{/board/add}" th:object="${board}" method="post">              
+	                    <table class="table">
+	                    	<tbody>
+		                        <tr>
+		                        	<th>제목</th>
+		                            <td>
+		                            	<input type="text" id="title" th:field="*{title}" th:value="*{title}" class="form-control">
+		                            </td>
+		                        </tr>
+		                        <tr>
+		                        	<th>작성자</th>
+		                            <td>
+		                            	<span>관리자</span>
+		                            </td>
+		                        </tr>
+		                        <tr>
+		                        	<th>내용</th>
+		                        	<td>
+		                        		<textarea rows="10" cols="100" id="content" th:field="*{content}" th:value="*{content}" class="form-control"></textarea>
+		                        	</td>
+		                        </tr>
+	                    	</tbody>
+	                    </table>
+		                <div class="container" role="group">
+		                	<input type="submit" class="btn btn-danger inline" value="글 수정" />
+		                	<a class="btn btn-primary inline" href="/board/list">글 목록</a>
+		                </div>
+                     </form>
+                </div>
+            </div>
+		</div>
+  	</div>
+	<th:block th:insert="common/footer"></th:block>
+</div>
+</body>
+</html>

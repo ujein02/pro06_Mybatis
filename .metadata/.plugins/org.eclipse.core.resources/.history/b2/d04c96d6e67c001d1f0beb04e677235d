@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop2.myapp.model.BoardMapper">
+    <select id="findAll" resultType="com.shop2.myapp.dto.BoardDTO">
+        select * from boardA
+	</select>
+    <select id="getBoard" resultType="com.shop2.myapp.dto.BoardDTO">
+        select * from boardA where id=#{id}
+	</select>
+    <insert id="addBoard">
+        insert into boardA(title, content, writer, hits, delete_yn, created_date) values (#{title}, #{content}, #{writer}, 0, 'Y', sysdate)
+	</insert>
+    <update id="updateBoard">
+        update boardA set title=#{title}, content=#{content}, writer=#{writer}, modified_date=sysdate where id=#{id}
+	</update>
+	<update id="hitsUpdate">
+		update boardA set hits=hits+1 where id=#{id}
+	</update>
+	<delete id="delBoard">
+		delete from boardA where id=#{id}
+	</delete>
+</mapper>
