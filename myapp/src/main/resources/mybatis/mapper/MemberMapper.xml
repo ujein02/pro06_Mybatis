@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop2.myapp.model.MemberMapper">
+    <!-- 로그인 -->
+    <select id="getUserAccount" resultType="com.shop2.myapp.dto.MemberDTO">
+        select * from TB_USER where userId=#{userId}
+	</select>
+	<!-- 회원 가입 : dao에서 insert("member.memberInsert", dto) -->
+	<insert id="saveUser" parameterType="com.shop2.myapp.dto.MemberDTO">
+		insert into TB_USER (userNo, userId, userPw, userName, userAuth, appendDate, updateDate)
+        VALUES(nseq.nextval, #{userId},#{userPw},#{userName},#{userAuth},sysdate,sysdate)
+	</insert>
+	 <!-- 회원 정보 수정 -->
+	<update id="updateUser" parameterType="com.shop2.myapp.dto.MemberDTO">
+        UPDATE TB_USER SET userPw=#{userPw}, userName=#{userName} WHERE userId=#{userId}
+    </update>
+</mapper>
