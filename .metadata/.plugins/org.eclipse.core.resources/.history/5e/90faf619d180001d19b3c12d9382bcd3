@@ -1,0 +1,13 @@
+package com.shop2.myapp.service;
+
+import java.util.List;
+
+import com.shop2.myapp.dto.MemberDTO;
+import com.shop2.myapp.dto.SampleDTO;
+
+
+public interface AjaxService {
+	public List<MemberDTO> findAll() throws Exception;
+	public MemberDTO getUser(String userId) throws Exception;
+
+}

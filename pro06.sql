@@ -70,6 +70,8 @@ visited int default 0
 
 select * from TB_USER;
 
+UPDATE TB_USER SET userAuth='ADMIN' WHERE userNo=3;
+
 drop table TB_USER;
 
 insert into TB_USER(userId, userPw, userName, email, tel) values('admin','1234','관리자','admin@email.com','010-0000-0000');
@@ -181,3 +183,31 @@ select * from member;
 commit;
 
 select * from free;
+
+
+select * from TB_USER where userid='admin';
+
+update TB_USER set userPw='1234' where userId='admin';
+
+$2a$10$iy7afS7qwI.53ycEuq5a2O96WGbY/bDMX8hHC/mnO4hWn9CUJaHn.
+
+
+-- 회원
+CREATE table TB_USER(
+userNo number primary key, 
+userId varchar2(20) not null, 
+userPw varchar2(500) not null, 
+userName varchar2(20),
+email varchar2(20),
+regdate date default sysdate
+);
+
+create sequence mseq;
+
+drop sequence mseq;
+
+insert into TB_USER values(mseq.nextval, 'admin','1234','관리자','admin@email.com',sysdate);
+
+commit;
+
+select * from tb_user;

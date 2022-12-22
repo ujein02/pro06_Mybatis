@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Ajax</title>
+    <script src="https://code.jquery.com/jquery-latest.js"></script> 
+    <style>
+    .container { clear:both; width:1000px; margin:20px auto; line-height:2.8; } 
+    .container:after { content:""; display:block; clear:both; }
+    .data { clear: both; }
+    .data:after { content:""; display:block; clear:both; }
+    .table th { border-top:2px solid #333; }
+    .table td, .table th { border-bottom:2px solid #333; } 
+    </style>
+</head>
+<body>
+    <section class="container">
+        <h1>Ajax</h1>
+        <article id="data">
+           <form>
+            <input type="text" id="id" name="id" placeholder="아이디 입력" required>
+            <input type="hidden" id="idck" name="idck" value="no">
+           </form>
+           <button type="button" id="btn1">회원정보 조회</button>
+           <div id="msg"></div><br> 
+           <ul id="result"></ul>   
+        </article>
+    </section>
+    <br><hr><br>
+    <script>
+    $(document).ready(function(){
+     $("#btn1").click(function(){
+            var id = $("#id").val();
+            $("#result").empty();
+            if(id==""){
+                alert("아이디가 입력되지 않았습니다.");
+                return false;
+            }
+            $.ajax({
+                url:"/ajax/getUser.do?userId="+id,   //요청 데이터를 받아 처리하는 서버측 컨트롤러 또는 페이지
+                contentType:'application/json;charset=utf-8', 
+                method:"GET",      // 전송 방식 : post, get, put
+                dataType:"json",    //반환받을 데이터 타입 - json, xml, script, html
+            })
+            .done(function(res){    //처리 성공시 처리할 문장
+                console.log(res);
+                $.each(res, function(key, value){
+					$("#result").append("<li>"+key+" : "+value+"</li>");
+				});
+                                
+            })
+            .fail(function(xhr, status, errorThrown){   // 처리 실패시 처리할 문장
+                $("#msg").text("해당 회원의 정보를 불러오지 못했습니다.");
+            });
+            
+        });
+       
+    });    
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>메인 페이지</title>
+	<th:block th:insert="common/head"></th:block>
+</head>
+<body>
+<div class="fluid-container">
+	<th:block th:insert="common/header"></th:block>
+	<div class="container">
+	<div class="container">
+        <!-- Slider main container -->
+        <div class="swiper" id="sw1">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+            <!-- Slides -->
+                <div class="swiper-slide">
+                    <img th:src="@{/img/main1.jpg}" alt="이미지">
+                </div>
+                <div class="swiper-slide">
+                    <img th:src="@{/img/main2.jpg}" alt="이미지">
+                </div>
+                <div class="swiper-slide">
+                    <img th:src="@{/img/main3.jpg}" alt="이미지">
+                </div>
+                <div class="swiper-slide">
+                    <img th:src="@{/img/main4.jpg}" alt="이미지">
+                </div>
+                <div class="swiper-slide">
+                    <img th:src="@{/img/main5.jpg}" alt="이미지">
+                </div>
+                <div class="swiper-slide">
+                    <img th:src="@{/img/main6.jpg}" alt="이미지">
+                </div>
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+        
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        
+            <!-- If we need scrollbar -->
+            <div class="swiper-scrollbar"></div>
+        </div>
+    </div>
+    <script>
+
+    var swiper = new Swiper("#sw1", {
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    
+    
+    </script>
+  	</div>
+	<th:block th:insert="common/footer"></th:block>
+	<script>
+	
+	</script>
+</div>
+</body>
+</html>
