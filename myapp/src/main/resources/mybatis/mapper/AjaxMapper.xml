@@ -10,4 +10,7 @@
   	<select id="getLogin" resultType="com.shop2.myapp.dto.MemberDTO">
         select userId, userPw, userName from TB_USER where userId=#{userId}
 	</select>
+	<insert id="signUser">
+		insert into TB_USER values (mseq.nextval, #{userId}, #{userPw}, #{userName}, #{email}, sysdate) 
+	</insert>
 </mapper>

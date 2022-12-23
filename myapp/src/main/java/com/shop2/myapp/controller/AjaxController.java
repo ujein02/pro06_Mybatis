@@ -9,12 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shop2.myapp.dto.MemberDTO;
 import com.shop2.myapp.service.AjaxService;
+import com.shop2.myapp.util.AES256;
 
 @Controller
 @RequestMapping("/ajax/")
@@ -23,7 +26,7 @@ public class AjaxController {
 	@Resource
 	private AjaxService ajaxService;
 	
-	@Resource
+	@Autowired
 	private HttpSession session;
 	
 	@GetMapping("test1")
@@ -84,9 +87,12 @@ public class AjaxController {
 //		
 //	}
 	
+	//로그인
 	@GetMapping("getLogin.do")
 	@ResponseBody
-	public MemberDTO getLogin(@RequestParam("userId") String userId,@RequestParam("userPw") String userPw, Model model) throws Exception{
+	public MemberDTO getLogin(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw, Model model) throws Exception{
+		AES256 aes256 = new AES256();
+		userPw = aes256.encrypt(userPw);
 		MemberDTO user = ajaxService.getLogin(userId, userPw);
 		if(user==null) {
 			session.invalidate();
@@ -98,4 +104,17 @@ public class AjaxController {
 		
 	}
 	
+	//회원가입
+	@GetMapping("test5")
+	public String testLoad5(@ModelAttribute("member") MemberDTO member, Model model) throws Exception {
+		return "member/join";
+	}
+	
+	@PostMapping("signUser.do")
+	public String signUser(@ModelAttribute("member") MemberDTO member, Model model) throws Exception{
+		AES256 aes256 = new AES256();
+		member.setUserPw(aes256.encrypt(member.getUserPw()));
+		ajaxService.signUser(member);
+		return "/";
+	}
 }

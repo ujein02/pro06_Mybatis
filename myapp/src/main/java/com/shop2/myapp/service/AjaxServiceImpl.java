@@ -29,7 +29,11 @@ public class AjaxServiceImpl implements AjaxService {
 		return ajaxMapper.getLogin(userId, userPw);
 	}
 	
-	
+	@Override
+	public void signUser(MemberDTO member) throws Exception {
+		ajaxMapper.signUser(member);
+		
+	}
 	
 	
 
