@@ -117,4 +117,9 @@ public class AjaxController {
 		ajaxService.signUser(member);
 		return "/";
 	}
+	
+	@GetMapping("test6")
+	public String testLoad6(@ModelAttribute("member") MemberDTO member, Model model) throws Exception {
+		return "member/agree";
+	}
 }

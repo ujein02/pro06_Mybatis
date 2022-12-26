@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shop2.myapp.model.BoardMapper">
     <select id="findAll" resultType="com.shop2.myapp.dto.BoardDTO">
-        select * from boardN
+        select * from boardN order by bno 
 	</select>
     <select id="getBoard" resultType="com.shop2.myapp.dto.BoardDTO">
         select * from boardN where bno=#{bno}

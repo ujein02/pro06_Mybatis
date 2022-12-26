@@ -22,7 +22,8 @@
 		                        <tr>
 		                        	<th>제목</th>
 		                            <td>
-		                            	<input type="text" id="title" th:field="*{title}" th:value="*{title}" class="form-control">
+		                            	<input type="text" name="title" id="title" placeholder="제목 입력" th:value="*{title }" class="form-control">
+		                            	<input type="hidden" name="bno" id="bno" th:value="*{bno }" >
 		                            </td>
 		                        </tr>
 		                        <tr>

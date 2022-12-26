@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;myapp/src/main/resources/templates/qna/qnaList.html&apos; to &apos;list.html&apos;" description="Rename resource &apos;qnaList.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/templates/qna/qnaList.html" name="list.html" stamp="1672015063843" updateReferences="true"/>
+</session>
