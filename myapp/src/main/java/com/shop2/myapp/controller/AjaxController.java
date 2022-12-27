@@ -3,9 +3,9 @@ package com.shop2.myapp.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,9 +25,6 @@ public class AjaxController {
 	
 	@Resource
 	private AjaxService ajaxService;
-	
-	@Autowired
-	private HttpSession session;
 	
 	@GetMapping("test1")
 	public String testLoad(Model model) throws Exception {
@@ -90,13 +87,15 @@ public class AjaxController {
 	//로그인
 	@GetMapping("getLogin.do")
 	@ResponseBody
-	public MemberDTO getLogin(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw, Model model) throws Exception{
+	public MemberDTO getLogin(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw, Model model, HttpServletRequest request) throws Exception{
 		AES256 aes256 = new AES256();
 		userPw = aes256.encrypt(userPw);
+		HttpSession session = request.getSession();
 		MemberDTO user = ajaxService.getLogin(userId, userPw);
 		if(user==null) {
 			session.invalidate();
 		} else {
+			session.setAttribute("loginUser", user);
 			session.setAttribute("sid", user.getUserId());
 			session.setAttribute("sname", user.getUserName());
 		}

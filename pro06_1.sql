@@ -67,6 +67,8 @@ create table qna(
     sec varchar2(10)
 );
 
+create SEQUENCE qnseq;
+
 drop table qna;
 
 delete from member where id='admin';
