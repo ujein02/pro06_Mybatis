@@ -20,9 +20,35 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public QnaDTO getQna(String qno) throws Exception {
+	public QnaDTO getQna(int qno) throws Exception {
 		return qnaMapper.getQna(qno);
 	}
+
+	@Override
+	public void addQna(QnaDTO qna) throws Exception {
+		qnaMapper.addQna(qna);
+		
+	}
+
+	@Override
+	public void addReply(QnaDTO qna) throws Exception {
+		qnaMapper.addReply(qna);
+		
+	}
+
+	@Override
+	public void qnaDelete(int qno) throws Exception {
+		qnaMapper.qnaDelete(qno);
+		
+	}
+
+	@Override
+	public void qnaEdit(QnaDTO dto) throws Exception {
+		qnaMapper.qnaEdit(dto);
+		
+	}
+	
+	
 	
 	
 

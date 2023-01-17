@@ -31,7 +31,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public void signUser(MemberDTO member) throws Exception {
-		// TODO Auto-generated method stub
+		memberMapper.signUser(member);
 		
 	}
 	

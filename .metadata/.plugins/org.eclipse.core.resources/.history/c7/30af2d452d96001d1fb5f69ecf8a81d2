@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>QNA 목록</title>
+	<th:block th:insert="common/head"></th:block>
+	<style>
+	.table { border-top:2px solid #212529; }
+	</style>
+</head>
+<body>
+<div class="fluid-container">
+	<th:block th:insert="common/header"></th:block>
+	<div class="py-5">
+		<div class="container px-5 my-5">
+			<div class="text-center mb-5">
+                <h1 class="fw-bolder">QNA 목록</h1>
+			</div>
+			<div class="row gx-5">
+                <div class="col-xl-12">
+                    <!-- FAQ Accordion 1-->
+                    <table class="table table-striped">
+                    	<thead class="thead-dark">
+                    		<tr>
+                    			<th scope="col">연번</th>
+                    			<th scope="col">제목</th>
+                    			<th scope="col">작성자</th>
+                    			<th scope="col">작성일</th>
+                    		</tr>
+                    	</thead>
+                    	<tbody>
+	                        <tr th:each="qna : ${qnaList}">
+	                        	<td><input type="hidden" name="parno" id="parno" value="${qna.parno }"></td>
+	                            <td th:if="${qna.lev==0}"> 
+	                            	<span th:text="${qna.qno}"></span>
+	                            </td>
+	                            <td th:if="${qna.lev==1}"> 
+	                            	<input type="hidden" name="parno" id="parno" value="${qna.qno }">
+	                            </td>
+	                            <th:block th:if="${qna.lev==0}">
+	                          	 	<th:block th:if='${qna.sec.equals("Y")}'>
+	                          	 		<th:block th:if='${sid.equals(qna.qauthor) || sid.equals("admin")}'>
+	                          	 			<a th:href="@{/qna/detail(qno=${qna.qno })}" th:text="${qna.qtitle }"></a>
+	                          	 		</th:block>
+	                          	 		<th:block th:if='${sid.equals(qna.qauthor) || sid!="admin" && not empty sid}'>
+	                          	 			<span th:text="${qna.qtitle}"></span>
+	                          	 		</th:block>
+	                          	 	</th:block>
+	                            </th:block>
+	                            
+	                            <th:block th:if="${qna.lev==1}">
+	                          	 	<th:block th:if='${qna.sec.equals("Y")}'>
+	                          	 		<th:block th:if='${sid.equals(qna.qauthor) || sid.equals("admin")}'>
+	                          	 			<a th:href="@{/qna/detail(qno=${qna.qno })}" th:text="${qna.qtitle }" style="padding-left:30px;"></a>
+	                          	 		</th:block>
+	                          	 		<th:block th:if='${sid.equals(qna.qauthor) || sid!="admin" && not empty sid}'>
+	                          	 			<span th:text="${qna.qtitle}"></span>
+	                          	 		</th:block>
+	                          	 		<th:block th:if='${empty sid}'>
+	                          	 			<span style="padding-left:30px;" th:text="${qna.qtitle}"></span>
+	                          	 		</th:block>
+	                          	 	</th:block>
+	                          	 	<th:block th:if='${qna.sec.equals("N") && not empty sid}'>
+	                          	 			<a th:href="@{/qna/detail(qno=${qna.qno })}" th:text="${qna.qtitle } style="padding-left:30px;"></a>
+                          	 		</th:block>
+                          	 		<th:block th:if='${qna.sec.equals("N") && empty sid}'>
+	                          	 			<span style="padding-left:30px;" th:text="${qna.qtitle}"></span>
+                          	 		</th:block>
+	                            </th:block>
+	                            <td th:text="${qna.qauthor}"></td>
+	                            <td th:text="${qna.regdate}"></td>
+	                        </tr>
+                    	</tbody>
+                    </table>
+                </div>
+                <div class="container" role="group">
+                	<a class="btn btn-primary inline" href="/qna/add">글 등록</a>
+                </div>
+            </div>
+		</div>
+  	</div>
+	<th:block th:insert="common/footer"></th:block>
+</div>
+</body>
+</html>

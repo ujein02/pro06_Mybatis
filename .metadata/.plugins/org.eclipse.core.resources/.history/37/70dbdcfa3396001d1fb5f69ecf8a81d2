@@ -1,0 +1,116 @@
+package com.shop2.myapp.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.shop2.myapp.dto.QnaDTO;
+import com.shop2.myapp.service.QnaService;
+
+@Controller
+@RequestMapping(value = "/qna/")
+public class QnaController {
+	
+	@Autowired
+	QnaService qnaService;
+	
+	@GetMapping("list")
+	public String getQnaList(Model model) throws Exception {
+		List<QnaDTO> qnaList = qnaService.qnaList();
+		model.addAttribute("qnaList", qnaList);
+		return "qna/qnaList";
+	}
+	
+	//상세보기
+	@GetMapping("detail")
+	public String getQna(HttpServletRequest request, Model model) throws Exception{
+		int qno = Integer.parseInt(request.getParameter("qno"));
+		QnaDTO dto = qnaService.getQna(qno);
+		model.addAttribute("dto",dto);
+		return "qna/qnaDetail";
+
+	}
+	
+	//질문 작성폼
+	@GetMapping("insert")
+	public String insertQna(HttpServletRequest request, Model model) throws Exception{
+		return "qna/qnaAdd";
+	}
+	
+	//질문하기
+	@PostMapping("insert")
+	public String QnaInsert(HttpServletRequest request, Model model) throws Exception {
+		QnaDTO dto = new QnaDTO();
+		dto.setQtitle(request.getParameter("qtitle"));
+		dto.setQcontent(request.getParameter("qcontent"));
+		dto.setQauthor(request.getParameter("qauthor"));
+		dto.setLev(Integer.parseInt(request.getParameter("lev")));
+		dto.setSec(request.getParameter("sec"));
+		qnaService.addQna(dto);
+		
+		return "redirect:/qna/qnaList";
+		}
+		
+		//답변 작성폼
+		@GetMapping("reInsert")
+		public String insertReply(HttpServletRequest request, Model model) throws Exception{
+			int parno = Integer.parseInt(request.getParameter("qno"));
+			QnaDTO dto = qnaService.getQna(parno);
+			model.addAttribute("dto",dto);
+			return "qna/replyInsert";
+		}
+		
+		@PostMapping("reInsert.do")
+		public String ReplyInsert(HttpServletRequest request, Model model) throws Exception {
+			QnaDTO dto = new QnaDTO();
+			dto.setQtitle(request.getParameter("qtitle"));
+			dto.setQcontent(request.getParameter("qcontent"));
+			dto.setQauthor(request.getParameter("qauthor"));
+			dto.setLev(Integer.parseInt(request.getParameter("lev")));
+			dto.setParno(Integer.parseInt(request.getParameter("parno")));
+			dto.setSec(request.getParameter("sec"));
+			qnaService.addReply(dto);
+			
+			return "redirect:/qna/qnaList";
+		}
+		
+		//qna 삭제
+		@GetMapping("delete.do")
+		public String qnaDelete(HttpServletRequest request, Model model) throws Exception {
+			int qno = Integer.parseInt(request.getParameter("qno"));
+			qnaService.qnaDelete(qno);
+			
+			return "redirect:/qna/qnaList";
+		}
+		
+		//Qna 수정 폼
+		@GetMapping("edit")
+		public String editForm(HttpServletRequest request, Model model) throws Exception {
+			int qno = Integer.parseInt(request.getParameter("qno"));
+			QnaDTO dto = qnaService.getQna(qno);
+			model.addAttribute("dto", dto);
+			return "qna/qnaEdit";
+		}
+
+		@PostMapping("edit.do")
+		public String qnaEdit(HttpServletRequest request, Model model) throws Exception {
+			int qno = Integer.parseInt(request.getParameter("qno"));
+			
+			QnaDTO dto = new QnaDTO();
+			dto.setQno(qno);
+			dto.setQtitle(request.getParameter("qtitle"));
+			dto.setQcontent(request.getParameter("qcontent"));
+			dto.setQauthor(request.getParameter("qauthor"));
+			dto.setSec(request.getParameter("sec"));
+			qnaService.qnaEdit(dto);
+			
+			return "redirect:/qna/qnaList";
+		}
+	}

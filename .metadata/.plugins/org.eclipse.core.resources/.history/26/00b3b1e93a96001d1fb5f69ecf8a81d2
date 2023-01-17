@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>메인 페이지</title>
+	<th:block th:insert="common/head"></th:block>
+</head>
+<body>
+<div class="fluid-container">
+	<th:block th:insert="common/header"></th:block>
+	<div class="container">
+	<div class="container">
+        <!-- Slider main container -->
+        <div class="swiper" id="sw1">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+            <!-- Slides -->
+                <div class="swiper-slide">
+                    <img th:src="@{/img/main1.jpg}" alt="이미지">
+                </div>
+                <div class="swiper-slide">
+                    <img th:src="@{/img/main2.jpg}" alt="이미지">
+                </div>
+                <div class="swiper-slide">
+                    <img th:src="@{/img/main3.jpg}" alt="이미지">
+                </div>
+                <div class="swiper-slide">
+                    <img th:src="@{/img/main4.jpg}" alt="이미지">
+                </div>
+                <div class="swiper-slide">
+                    <img th:src="@{/img/main5.jpg}" alt="이미지">
+                </div>
+                <div class="swiper-slide">
+                    <img th:src="@{/img/main6.jpg}" alt="이미지">
+                </div>
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+        
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        
+            <!-- If we need scrollbar -->
+            <div class="swiper-scrollbar"></div>
+        </div>
+    </div>
+    <script>
+
+    var swiper = new Swiper("#sw1", {
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    
+    
+    </script>
+  	</div>
+  	<div class="card" style="width: 20rem;">
+	  <img src="..." class="card-img-top" alt="...">
+	  <div class="card-body">
+	    <h5 class="card-title">Card title</h5>
+	    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+	    <a href="#" class="btn btn-primary">Go somewhere</a>
+	  </div>
+	</div>
+	<th:block th:insert="common/footer"></th:block>
+	<script>
+	function isMobile(){
+		var UserAgent = navigator.userAgent;
+		if (UserAgent.match(/iPhone|iPod|Android|Windows CE|BlackBerry|Symbian|Windows Phone|webOS|Opera Mini|Opera Mobi|POLARIS|IEMobile|lgtelecom|nokia|SonyEricsson/i) != null || UserAgent.match(/LG|SAMSUNG|Samsung/) != null)
+		{
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/*if(isMobile()){
+		location.href = "/mobile/test1.do";	//모바일페이지
+	} else {
+		location.href = "/";		//PC용 페이지
+	}*/
+	</script>
+</div>
+</body>
+</html>
