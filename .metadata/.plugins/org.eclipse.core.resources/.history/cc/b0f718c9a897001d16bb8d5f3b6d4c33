@@ -16,35 +16,25 @@
 			</div>
 			<div class="row gx-5">
                 <div class="col-xl-12">
-                     <form name="frm1" id="frm1" th:action="@{/qna/insert}" method="post">              
+                     <form th:action="@{/qna/insert}" th:object="${dto}" method="post">              
 	                    <table class="table">
 	                    	<tbody>
 		                        <tr>
 		                        	<th>제목</th>
 		                            <td>
-		                            	<input type="text" id="qtitle"  placeholder="제목 입력" maxlength="100"  class="form-control">
+		                            	<input type="text" id="qtitle" th:field="*{qtitle}" class="form-control">
 		                            </td>
 		                        </tr>
 		                        <tr>
 		                        	<th>내용</th>
 		                        	<td>
-		                        		<textarea rows="10" cols="100" id="qcontent" maxlength="600" class="form-control"></textarea>
+		                        		<textarea rows="10" cols="100" id="qcontent" th:field="*{qcontent}" class="form-control"></textarea>
 		                        	</td>
 		                        </tr>
 		                        <tr>
 		                        	<th>작성자</th>
 		                            <td>
-		                            	<input type="text" id="qauthor"  class="form-control" >
-		                            	<input type="hidden" name="lev" id="lev" value="0">
-		                            </td>
-		                        </tr>
-		                        <tr>
-		                        	<th>비밀글 여부</th>
-		                            <td>
-		                            	<input type="radio" name="sec" id="sec1" value="N" checked>
-										<label for="">공개</label>
-										<input type="radio" name="sec" id="sec2" value="Y">
-										<label for="">비밀글</label>
+		                            	<input type="text" id="qauthor" th:field="*{qauthor}" th:value='${sid}' class="form-control">
 		                            </td>
 		                        </tr>
 		                        

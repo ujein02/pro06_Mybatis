@@ -34,7 +34,7 @@
 		                        <tr>
 		                        	<th>작성자</th>
 		                            <td>
-		                            	<input type="text" id="qauthor"  class="form-control" >
+		                            	<input type="text" id="qauthor" th:value='${sid}' class="form-control" readonly >
 		                            	<input type="hidden" name="lev" id="lev" value="0">
 		                            </td>
 		                        </tr>

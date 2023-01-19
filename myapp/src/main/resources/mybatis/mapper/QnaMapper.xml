@@ -7,5 +7,20 @@
 	<select id="getQna" resultType="com.shop2.myapp.dto.QnaDTO">
         select * from qna where qno=#{qno}
 	</select>
-
+	<!-- 글등록-->
+	<insert id="qnaInsert">
+		insert into qna(qno, qtitle, qcontent, qauthor, regdate, lev, parno, sec) values(qneq.nextval, #{qtitle}, #{qcontent}, #{qauthor}, sysdate, #{lev}, qna_mseq.currval, #{sec})
+	</insert>
+	<!-- 답변 등록-->
+	<insert id="replyInsert">
+		insert into qna(qno, qtitle, qcontent, qauthor, lev, parno, sec) values((select nvl(max(qno), 0)+1 from qna), #{qtitle}, #{qcontent}, #{qauthor}, #{lev}, #{parno}, #{sec})
+	</insert>
+	<!-- 삭제 -->
+	<delete id="qnaDelete">
+		delete from qna where qno=#{qno}
+	</delete>
+	<!-- 수정 -->
+	<update id="qnaEdit">
+		update qna set qtitle=#{qtitle}, qcontent=#q{content}, qauthor=#{qauthor}, sec=#{sec}, lev=#{lev} where qno=#{qno}
+	</update>
 </mapper>

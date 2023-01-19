@@ -41,8 +41,8 @@ public class QnaController {
 	
 	//질문 작성폼
 	@GetMapping("insert")
-    public String insertQnaForm(Model model, QnaDTO dto) {
-    	model.addAttribute("dto", dto);
+    public String insertQnaForm(Model model, QnaDTO qna) {
+    	model.addAttribute("qna", qna);
     	return "qna/qnaAdd";
     }
     
